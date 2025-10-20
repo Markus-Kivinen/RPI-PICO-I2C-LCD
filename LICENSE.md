@@ -1,6 +1,8 @@
 MIT License
 
-Copyright (c) 2023 Tyler Peppy
+Original: Copyright (c) 2013 Dave Hylands
+Modified: Copyright (c) 2023 Tyler Peppy
+Fork: Copyright (c) 2025 Markus Kivinen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
