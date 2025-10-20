@@ -1,7 +1,7 @@
 # RPI-PICO-I2C-LCD
 This is a project which adapts code from another user to allow usage of the PCF8574 I2C lcd backpack for either 20x4 or 16x2 lcd screens.
 
-Credit: https://github.com/dhylands/python_lcd/tree/master/lcd mostly to Dave Hylands for the basic api and lcd driver code.
+Credit: https://github.com/dhylands/python_lcd/tree/master/lcd and https://github.com/T-622/RPI-PICO-I2C-LCD mostly to Dave Hylands for the basic api and lcd driver code.
 
 Project: Check it out for a full step-by-setp guide on Instructables: https://www.instructables.com/RPI-Pico-I2C-LCD-Control/ 
 

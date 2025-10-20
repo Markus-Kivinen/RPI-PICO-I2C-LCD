@@ -1,7 +1,7 @@
 import time
 
+
 class LcdApi:
-    
     # Implements the API for talking with HD44780 compatible character LCDs.
     # This class only knows what commands to send to the LCD, and not how to get
     # them to the LCD.
@@ -10,7 +10,7 @@ class LcdApi:
     #
     # The following constant names were lifted from the avrlib lcd.h header file,
     # with bit numbers changed to bit masks.
-    
+
     # HD44780 LCD controller command set
     LCD_CLR             = 0x01  # DB0: clear display
     LCD_HOME            = 0x02  # DB1: return to home position
@@ -70,8 +70,9 @@ class LcdApi:
 
     def show_cursor(self):
         # Causes the cursor to be made visible
-        self.hal_write_command(self.LCD_ON_CTRL | self.LCD_ON_DISPLAY |
-                               self.LCD_ON_CURSOR)
+        self.hal_write_command(
+            self.LCD_ON_CTRL | self.LCD_ON_DISPLAY | self.LCD_ON_CURSOR
+        )
 
     def hide_cursor(self):
         # Causes the cursor to be hidden
@@ -79,13 +80,18 @@ class LcdApi:
 
     def blink_cursor_on(self):
         # Turns on the cursor, and makes it blink
-        self.hal_write_command(self.LCD_ON_CTRL | self.LCD_ON_DISPLAY |
-                               self.LCD_ON_CURSOR | self.LCD_ON_BLINK)
+        self.hal_write_command(
+            self.LCD_ON_CTRL
+            | self.LCD_ON_DISPLAY
+            | self.LCD_ON_CURSOR
+            | self.LCD_ON_BLINK
+        )
 
     def blink_cursor_off(self):
         # Turns on the cursor, and makes it no blink (i.e. be solid)
-        self.hal_write_command(self.LCD_ON_CTRL | self.LCD_ON_DISPLAY |
-                               self.LCD_ON_CURSOR)
+        self.hal_write_command(
+            self.LCD_ON_CTRL | self.LCD_ON_DISPLAY | self.LCD_ON_CURSOR
+        )
 
     def display_on(self):
         # Turns on (i.e. unblanks) the LCD
@@ -97,7 +103,7 @@ class LcdApi:
 
     def backlight_on(self):
         # Turns the backlight on.
-        
+
         # This isn't really an LCD command, but some modules have backlight
         # controls, so this allows the hal to pass through the command.
         self.backlight = True
@@ -116,17 +122,17 @@ class LcdApi:
         # position is zero based (i.e. cursor_x == 0 indicates first column).
         self.cursor_x = cursor_x
         self.cursor_y = cursor_y
-        addr = cursor_x & 0x3f
+        addr = cursor_x & 0x3F
         if cursor_y & 1:
-            addr += 0x40    # Lines 1 & 3 add 0x40
-        if cursor_y & 2:    # Lines 2 & 3 add number of columns
+            addr += 0x40  # Lines 1 & 3 add 0x40
+        if cursor_y & 2:  # Lines 2 & 3 add number of columns
             addr += self.num_columns
         self.hal_write_command(self.LCD_DDRAM | addr)
 
     def putchar(self, char):
         # Writes the indicated character to the LCD at the current cursor
         # position, and advances the cursor by one position.
-        if char == '\n':
+        if char == "\n":
             if self.implied_newline:
                 # self.implied_newline means we advanced due to a wraparound,
                 # so if we get a newline right after that we ignore it.
@@ -139,7 +145,7 @@ class LcdApi:
         if self.cursor_x >= self.num_columns:
             self.cursor_x = 0
             self.cursor_y += 1
-            self.implied_newline = (char != '\n')
+            self.implied_newline = char != "\n"
         if self.cursor_y >= self.num_lines:
             self.cursor_y = 0
         self.move_to(self.cursor_x, self.cursor_y)
