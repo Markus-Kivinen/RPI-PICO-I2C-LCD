@@ -3,6 +3,10 @@ This is a project which adapts code from another user to allow usage of the PCF8
 
 Credit: https://github.com/dhylands/python_lcd/tree/master/lcd and https://github.com/T-622/RPI-PICO-I2C-LCD mostly to Dave Hylands for the basic api and lcd driver code.
 
+CHANGES COMPARED TO ORIGINAL:
+* Changed utime module to time module.
+* Removed all gc.collect() calls, if you think you are leaking/low on memory call it manually.
+
 Project: Check it out for a full step-by-setp guide on Instructables: https://www.instructables.com/RPI-Pico-I2C-LCD-Control/ 
 
 This is code adaptded for micropython and the Raspberry Pi PICO specifically.
